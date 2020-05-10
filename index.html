@@ -13,7 +13,7 @@ echo "---------------------------------------------"
 pacman -Syyy
 sleep 1
 pacman -S reflector
-sleep1
+sleep 1
 reflector -c Czechia -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 sleep 1
 pacman -Syyy
@@ -82,5 +82,9 @@ echo "FINISH INSTALLATION"
 echo "---------------------------------------------"
 
 genfstab -U /mnt >> /mnt/etc/fstab
+sleep 1
+wget tomasrejhons.github.io/arch-baseconfig
+sleep 1
+cp arch-baseconfig /mnt
 sleep 1
 arch-chroot /mnt
