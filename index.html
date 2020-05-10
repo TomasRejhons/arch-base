@@ -1,1 +1,12 @@
 #!/bin/bash
+
+echo "---------------------------------------------"
+echo "OPTIMIZING MIRRORLIST"
+echo "---------------------------------------------"
+pacman -Syyy
+sleep 1
+pacman -S reflector
+sleep1
+reflector -c Czechia -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+sleep 1
+pacman -Syyy
