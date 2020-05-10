@@ -74,43 +74,13 @@ echo "---------------------------------------------"
 echo "INSTALL BASE SYSTEM"
 echo "---------------------------------------------"
 
-pacstrap /mnt base linux linux-firmware nano snapper
-sleep 1
-
-echo "---------------------------------------------"
-echo "CONFIGURE SYSTEM"
-echo "---------------------------------------------"
-
-genfstab -U /mnt >> /mnt/etc/fstab
-sleep 1
-arch-chroot /mnt
-sleep 1
-ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
-sleep 1
-hwclock --systohc
-sleep 1
-nano /etc/locale.gen
-sleep 1
-locale-gen
-sleep 1
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-sleep 1
-echo "archblue" >> /etc/hostname
-sleep 1
-echo "127.0.0.1 localhost" >> /etc/hosts
-sleep 1
-echo "::1 localhost" >> /etc/hosts
-sleep 1
-echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
-sleep 1
-passwd
+pacstrap /mnt base linux linux-firmware nano snapper wget
 sleep 1
 
 echo "---------------------------------------------"
 echo "FINISH INSTALLATION"
 echo "---------------------------------------------"
 
-pacman -S grub grub-btrfs efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober mtools dosfstools base-devel linux-headers reflector
+genfstab -U /mnt >> /mnt/etc/fstab
 sleep 1
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH_GRUB
-sleep 1
+arch-chroot /mnt
