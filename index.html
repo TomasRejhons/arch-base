@@ -103,3 +103,14 @@ echo "::1 localhost" >> /etc/hosts
 sleep 1
 echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
 sleep 1
+passwd
+sleep 1
+
+echo "---------------------------------------------"
+echo "FINISH INSTALLATION"
+echo "---------------------------------------------"
+
+pacman -S grub grub-btrfs efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober mtools dosfstools base-devel linux-headers reflector
+sleep 1
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH_GRUB
+sleep 1
