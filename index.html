@@ -41,3 +41,31 @@ sleep 1
 mkfs.btrfs $DRIVE_SYSTEM_PART
 sleep 1
 
+echo "---------------------------------------------"
+echo "MOUNT FILESYSTEM"
+echo "---------------------------------------------"
+
+mount $DRIVE_SYSTEM_PART /mnt
+sleep 1
+btrfs su cr /mnt/@
+sleep 1
+btrfs su cr /mnt/@home
+sleep 1
+btrfs su cr /mnt/@var
+sleep 1
+btrfs su cr /mnt/@snapshots
+sleep 1
+umount /mnt
+sleep 1
+mount -o noatime,compress=lzo,space_cache,subvol=@ $DRIVE_SYSTEM_PART /mnt
+sleep 1
+mkdir -p /mnt/{boot,home,var,.snapshots}
+sleep 1
+mount $DRIVE_EFI_PART /mnt/boot
+sleep 1
+mount -o noatime,compress=lzo,space_cache,subvol=@home $DRIVE_SYSTEM_PART /mnt/home
+sleep 1
+mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/var
+sleep 1
+mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
+sleep 1
