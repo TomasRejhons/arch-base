@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# CHANGE TO YOUR DRIVE!
+DRIVE=/dev/vda
+DRIVE_EFI_PART=/dev/vda1
+DRIVE_SWAP_PART=/dev/vda2
+DRIVE_SYSTEM_PART=/dev/vda3
+
 echo "---------------------------------------------"
 echo "OPTIMIZING MIRRORLIST"
 echo "---------------------------------------------"
+
 pacman -Syyy
 sleep 1
 pacman -S reflector
@@ -10,3 +17,27 @@ sleep1
 reflector -c Czechia -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 sleep 1
 pacman -Syyy
+sleep 1
+
+echo "---------------------------------------------"
+echo "CREATING PARTITIONS"
+echo "---------------------------------------------"
+
+sgdisk --zap-all $DRIVE
+sleep 1
+cfdisk $DRIVE
+sleep 1
+
+echo "---------------------------------------------"
+echo "INIT FILESYSTEM"
+echo "---------------------------------------------"
+
+mkfs.fat -F32 $DRIVE_EFI_PART
+sleep 1
+mkswap $DRIVE_SWAP_PART
+sleep 1
+swapon $DRIVE_SWAP_PART
+sleep 1
+mkfs.btrfs $DRIVE_SYSTEM_PART
+sleep 1
+
