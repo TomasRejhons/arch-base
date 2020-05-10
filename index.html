@@ -34,11 +34,11 @@ echo "---------------------------------------------"
 
 mkfs.fat -F32 $DRIVE_EFI_PART
 sleep 1
-mkswap $DRIVE_SWAP_PART
+mkswap -L SWAP $DRIVE_SWAP_PART
 sleep 1
 swapon $DRIVE_SWAP_PART
 sleep 1
-mkfs.btrfs $DRIVE_SYSTEM_PART
+mkfs.btrfs -L SYSTEM $DRIVE_SYSTEM_PART
 sleep 1
 
 echo "---------------------------------------------"
@@ -68,4 +68,38 @@ sleep 1
 mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/var
 sleep 1
 mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
+sleep 1
+
+echo "---------------------------------------------"
+echo "INSTALL BASE SYSTEM"
+echo "---------------------------------------------"
+
+pacstrap /mnt base linux linux-firmware nano snapper
+sleep 1
+
+echo "---------------------------------------------"
+echo "CONFIGURE SYSTEM"
+echo "---------------------------------------------"
+
+genfstab -U /mnt >> /mnt/etc/fstab
+sleep 1
+arch-chroot /mnt
+sleep 1
+ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
+sleep 1
+hwclock --systohc
+sleep 1
+nano /etc/locale.gen
+sleep 1
+locale-gen
+sleep 1
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+sleep 1
+echo "archblue" >> /etc/hostname
+sleep 1
+echo "127.0.0.1 localhost" >> /etc/hosts
+sleep 1
+echo "::1 localhost" >> /etc/hosts
+sleep 1
+echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
 sleep 1
