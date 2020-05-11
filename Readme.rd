@@ -1,10 +1,14 @@
+Collection of very simple scripts I'm using to automate Arch installation (EFI, BTRFS)
+
 Do a few dry runs on a virtual machine first!
 
-1. Boot Arch ISO
-2. Run `bash wget tomasrejhons.github.io/arch-baseinstall`
-3. Examine and edit arch-baseinstall
-4. Run `sh arch-baseinstall`
-5. Run `sh arch-baseconfig`
-6. exit the root prompt, umount -a and reboot
-7. Run `sh arch-snapperconfig`
-8. Run `sh archdi`
+- Boot Arch ISO
+- Run `bash wget tomasrejhons.github.io/arch-baseinstall`
+- Examine and edit arch-baseinstall
+- Run `sh arch-baseinstall`
+- Examine and edit arch-baseconfig
+- Run `sh arch-baseconfig`
+- exit the root prompt, umount -a and reboot
+- Examine and edit arch-snapperconfig
+- Run `sh arch-snapperconfig`
+- Run `sh archdi`
