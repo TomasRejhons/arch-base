@@ -33,9 +33,9 @@ Do a few dry runs on a virtual machine!
 - Run <code>bash wget tomasrejhons.github.io/malis</code>
 - Examine and edit malis (Edit the drive you want to install the system on and mirror servers location)
 - Run <code>sh malis</code>
-- Examine and edit arch-baseconfig (Edit the user name)
-- Run <code>sh arch-baseconfig</code>
+- Examine and edit malis-post-install (Edit the user name)
+- Run <code>sh malis-post-install</code>
 - exit the root prompt, <code>umount -a</code> and <code>reboot</code>
-- Examine and edit arch-snapperconfig
-- Run <code>sh arch-snapperconfig</code> to setup snapper and to create the initial system snapshot
+- Examine and edit malis-snapper
+- Run <code>sh malis-snapper</code> to setup snapper and to create the initial system snapshot
 - (Optional) Run <code>sh archdi</code> to install additional software
