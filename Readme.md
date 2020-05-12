@@ -30,9 +30,9 @@ Read through the manual installation process first! https://wiki.archlinux.org/i
 Do a few dry runs on a virtual machine first!
 
 - Boot Arch ISO
-- Run <code>bash wget tomasrejhons.github.io/arch-baseinstall</code>
-- Examine and edit arch-baseinstall (Edit the drive you want to install the system on and mirror servers location)
-- Run <code>sh arch-baseinstall</code>
+- Run <code>bash wget tomasrejhons.github.io/malis</code>
+- Examine and edit malis (Edit the drive you want to install the system on and mirror servers location)
+- Run <code>sh malis</code>
 - Examine and edit arch-baseconfig (Edit the user name)
 - Run <code>sh arch-baseconfig</code>
 - exit the root prompt, <code>umount -a</code> and <code>reboot</code>
