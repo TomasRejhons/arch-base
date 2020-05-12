@@ -1,4 +1,4 @@
-Collection of very simple scripts I'm using to automate Arch installation (EFI, BTRFS)
+Collection of very simple scripts I'm using to automate Arch installation (the whole installation process takes < 10 minutes). The script is hardcoded for UEFI and BTRFS + snapper.
 
 Do a few dry runs on a virtual machine first!
 
