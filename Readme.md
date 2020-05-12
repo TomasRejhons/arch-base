@@ -11,4 +11,4 @@ Do a few dry runs on a virtual machine first!
 - exit the root prompt, <code>umount -a</code> and <code>reboot</code>
 - Examine and edit arch-snapperconfig
 - Run <code>sh arch-snapperconfig</code> to setup snapper and to create the initial system snapshot
-- (Optional) Run <code>sh archdi</code> to install addition software
+- (Optional) Run <code>sh archdi</code> to install additional software
