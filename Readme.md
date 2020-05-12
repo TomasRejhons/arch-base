@@ -25,7 +25,7 @@
 
 Collection of very simple scripts I'm using to automate Arch installation (the whole installation process takes < 10 minutes). The script is hardcoded for UEFI and BTRFS + snapper.
 
-Read through the manual installation process first! https://wiki.archlinux.org/index.php/installation_guide
+Learn the manual installation process first! https://wiki.archlinux.org/index.php/installation_guide
 
 Do a few dry runs on a virtual machine first!
 
