@@ -15,8 +15,7 @@
      /ossssssss/        +ssssooo/-
    `/ossssso+/:-        -:/+osssso+-
   `+sso+:-`                 `.-/+oso:
- `++:.                           `-/+/
- .`                                 `
+ 
 
 # Arch Linux installation
 
