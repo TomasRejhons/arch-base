@@ -27,7 +27,7 @@ Collection of very simple scripts I'm using to automate Arch installation (the w
 
 Learn the manual installation process first! https://wiki.archlinux.org/index.php/installation_guide
 
-Do a few dry runs on a virtual machine first!
+Do a few dry runs on a virtual machine!
 
 - Boot Arch ISO
 - Run <code>bash wget tomasrejhons.github.io/malis</code>
