@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MIRRORS_LOCATION=Germany
+
 # CHANGE TO YOUR DRIVE!
 DRIVE=/dev/vda
 DRIVE_EFI_PART=/dev/vda1
@@ -11,22 +13,16 @@ echo "OPTIMIZING MIRRORLIST"
 echo "---------------------------------------------"
 
 pacman -Syyy
-sleep 1
 pacman -S reflector
-sleep 1
-reflector -c Czechia -a 6 --sort rate --save /etc/pacman.d/mirrorlist
-sleep 1
+reflector -c $MIRRORS_LOCATION -a 10 --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Syyy
-sleep 1
 
 echo "---------------------------------------------"
 echo "CREATING PARTITIONS"
 echo "---------------------------------------------"
 
 sgdisk --zap-all $DRIVE
-sleep 1
 cfdisk $DRIVE
-sleep 1
 
 echo "---------------------------------------------"
 echo "INIT FILESYSTEM"
@@ -74,17 +70,20 @@ echo "---------------------------------------------"
 echo "INSTALL BASE SYSTEM"
 echo "---------------------------------------------"
 
-pacstrap /mnt base linux linux-firmware nano snapper wget
-sleep 1
+pacstrap /mnt base \
+              linux \
+              linux-lts \
+              linux-zen \
+              linux-firmware \
+              nano \
+              snapper \
+              wget \
 
 echo "---------------------------------------------"
 echo "FINISH INSTALLATION"
 echo "---------------------------------------------"
 
 genfstab -U /mnt >> /mnt/etc/fstab
-sleep 1
 wget tomasrejhons.github.io/arch-baseconfig
-sleep 1
 cp arch-baseconfig /mnt
-sleep 1
 arch-chroot /mnt
