@@ -22,7 +22,9 @@ echo "CREATING PARTITIONS"
 echo "---------------------------------------------"
 
 sgdisk --zap-all $DRIVE
+sleep 1
 cfdisk $DRIVE
+sleep 1
 
 echo "---------------------------------------------"
 echo "INIT FILESYSTEM"
@@ -75,7 +77,9 @@ pacstrap /mnt base \
               linux-firmware \
               nano \
               snapper \
-              wget \
+              wget
+              
+sleep 1
               
 
 echo "---------------------------------------------"
@@ -83,6 +87,9 @@ echo "FINISH INSTALLATION"
 echo "---------------------------------------------"
 
 genfstab -U /mnt >> /mnt/etc/fstab
+sleep 1
 wget tomasrejhons.github.io/malis-post-install
+sleep 1
 cp malis-post-install /mnt
+sleep 1
 arch-chroot /mnt
