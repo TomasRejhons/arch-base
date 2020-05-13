@@ -30,13 +30,13 @@ echo "---------------------------------------------"
 echo "INIT FILESYSTEM"
 echo "---------------------------------------------"
 
-mkfs.fat -F32 $DRIVE_EFI_PART
+mkfs.fat -F32 -n EFI $DRIVE_EFI_PART
 sleep 1
 mkswap -L SWAP $DRIVE_SWAP_PART
 sleep 1
 swapon $DRIVE_SWAP_PART
 sleep 1
-mkfs.btrfs -L SYSTEM $DRIVE_SYSTEM_PART
+mkfs.btrfs -f -L SYSTEM $DRIVE_SYSTEM_PART
 sleep 1
 
 echo "---------------------------------------------"
