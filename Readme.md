@@ -21,7 +21,7 @@
 
 
 
-# Minimalistic Arch Linux Installation Script
+# Minimalist Arch Linux Installation Script
 
 Collection of very simple scripts I'm using to automate Arch installation (the whole installation process takes < 10 minutes). The script is hardcoded for UEFI and BTRFS + snapper.
 
