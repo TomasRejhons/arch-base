@@ -50,20 +50,8 @@ genfstab -L -p /mnt >> /mnt/etc/fstab
 sleep 1
 sed -i "s+LABEL=swap+/dev/mapper/swap" /mnt/etc/fstab
 sleep 1
-systemd-nspawn -bD /mnt
+wget tomasrejhons.github.io/malis-post-install
 sleep 1
-echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+cp malis-post-install /mnt
 sleep 1
-locale-gen
-sleep 1
-localectl set-locale LANG=en_US.UTF-8
-sleep 1
-timedatectl set-ntp 1
-sleep 1
-timedatectl set-timezone Europe/Prague
-sleep 1
-hostnamectl set-hostname archtest
-sleep 1
-echo "127.0.1.1	archtest.localdomain	archtest" >> /etc/hosts
-sleep 1
-pacman -Syu base-devel btrfs-progs iw gptfdisk zsh nvim terminus-font
+arch-chroot /mnt
