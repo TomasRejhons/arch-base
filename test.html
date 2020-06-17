@@ -50,6 +50,8 @@ genfstab -L -p /mnt >> /mnt/etc/fstab
 sleep 1
 sed -i "s+LABEL=swap+/dev/mapper/swap" /mnt/etc/fstab
 sleep 1
+vi /etc/crypttab
+sleep 1
 wget tomasrejhons.github.io/malis-post-install
 sleep 1
 cp malis-post-install /mnt
