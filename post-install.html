@@ -1,35 +1,8 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@TomasRejhons
-TomasRejhons /
-malis-post-install
-
-1
-0
-
-    0
-
-Code
-Issues 0
-Pull requests 0
-Actions
-Projects 0
-Wiki
-Security 0
-Insights
-
-    Settings
-
-malis-post-install/index.html
-@TomasRejhons TomasRejhons Update index.html 54993fd on May 13
-98 lines (79 sloc) 2.41 KB
 #!/bin/bash
 
 NEW_USER_NAME=tomas
+
+sudo pacman -S neovim
 
 echo "---------------------------------------------"
 echo "CONFIGURE SYSTEM"
@@ -39,7 +12,7 @@ ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
 sleep 1
 hwclock --systohc
 sleep 1
-nano /etc/locale.gen
+nvim /etc/locale.gen
 sleep 1
 locale-gen
 sleep 1
@@ -114,7 +87,7 @@ echo "---------------------------------------------"
 echo "DOWNLOADING SNAPPER INIT SCRIPT"
 echo "---------------------------------------------"
 
-wget tomasrejhons.github.io/malis-snapper
+wget tomasrejhons.github.io/malis/snapper-setup
 
 echo "---------------------------------------------"
 echo "DOWNLOADING ARCH-DI SCRIPT"
@@ -125,18 +98,4 @@ wget archdi.sf.net/archdi
 echo "---------------------------------------------"
 echo "DON'T FORGET TO exit, umount -a and reboot !!!"
 echo "---------------------------------------------"
-
-    © 2020 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
 
