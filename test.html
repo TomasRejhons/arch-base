@@ -44,6 +44,9 @@ mount -t btrfs -o subvol=home,$o_btrfs LABEL=system /mnt/home
 sleep 1
 mount -t btrfs -o subvol=snapshots,$o_btrfs LABEL=system /mnt/.snapshots
 sleep 1
+mkdir /mnt/boot
+sleep 1
+mount LABEL=EFI /mnt/boot
 pacstrap /mnt base
 sleep 1
 genfstab -L -p /mnt >> /mnt/etc/fstab
