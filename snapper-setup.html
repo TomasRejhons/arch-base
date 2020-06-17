@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "---------------------------------------------"
+echo "SNAPPER CONFIGURATION"
+echo "---------------------------------------------"
+
+umount /.snapshots
+sleep 1
+rm -rf /.snapshots
+sleep 1
+snapper -c root create-config /
+sleep 1
+nano /etc/snapper/configs/root
+sleep 1
+chmod a+rx /.snapshots
+sleep 1
+systemctl start snapper-timeline.timer
+sleep 1
+systemctl enable snapper-timeline.timer
+sleep 1
+systemctl start snapper-cleanup.timer
+sleep 1
+systemctl enable snapper-cleanup.timer
+sleep 1
+systemctl start grub-btrfs.path
+sleep 1
+systemctl enable grub-btrfs.path
+sleep 1
+snapper -c root create -c timeline --description InitSnap
+sleep 1
+snapper -c root list
