@@ -41,7 +41,11 @@ sleep 1
 mkdir /mnt/boot
 sleep 1
 mount LABEL=EFI /mnt/boot
-pacstrap /mnt base
+pacstrap /mnt base \
+              linux \
+              linux-firmware \
+              neovim \
+              wget
 sleep 1
 genfstab -L -p /mnt >> /mnt/etc/fstab
 sleep 1
