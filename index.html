@@ -15,7 +15,7 @@ echo "---------------------------------------------"
 pacman -Syyy
 pacman -S reflector
 reflector -c $MIRRORS_LOCATION -a 10 --sort rate --save /etc/pacman.d/mirrorlist
-pacman -Syyy vim
+pacman -Syyy
 
 echo "---------------------------------------------"
 echo "CREATING PARTITIONS"
