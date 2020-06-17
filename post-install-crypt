@@ -2,7 +2,7 @@
 
 NEW_USER_NAME=tomas
 
-sudo pacman -S neovim
+pacman -S neovim
 
 echo "---------------------------------------------"
 echo "CONFIGURE SYSTEM"
