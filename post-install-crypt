@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NEW_USER_NAME=tomas
+DRIVE=/dev/vda
 
 pacman -S neovim
 
