@@ -59,7 +59,7 @@ echo "MKINIT SETUP"
 echo "---------------------------------------------"
 
 # Configure mkinitcpio
-vim /etc/mkinitcpio.conf
+nvim /etc/mkinitcpio.conf
 sleep 1
 
 # Early modules load
@@ -77,7 +77,7 @@ echo "---------------------------------------------"
 echo "SETUP BOOTLOADER"
 echo "---------------------------------------------"
 
-vim /etc/default/grub
+nvim /etc/default/grub
 # Edit /etc/default/grub, add GRUB_ENABLE_CRYPTODISK=y and GRUB_DISABLE_SUBMENU=y
 #GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:archlinux:allow-discards"
 sleep 1
