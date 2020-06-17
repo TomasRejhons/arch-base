@@ -1,0 +1,142 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@TomasRejhons
+TomasRejhons /
+malis-post-install
+
+1
+0
+
+    0
+
+Code
+Issues 0
+Pull requests 0
+Actions
+Projects 0
+Wiki
+Security 0
+Insights
+
+    Settings
+
+malis-post-install/index.html
+@TomasRejhons TomasRejhons Update index.html 54993fd on May 13
+98 lines (79 sloc) 2.41 KB
+#!/bin/bash
+
+NEW_USER_NAME=tomas
+
+echo "---------------------------------------------"
+echo "CONFIGURE SYSTEM"
+echo "---------------------------------------------"
+
+ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
+sleep 1
+hwclock --systohc
+sleep 1
+nano /etc/locale.gen
+sleep 1
+locale-gen
+sleep 1
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "archblue" >> /etc/hostname
+echo "127.0.0.1 localhost" >> /etc/hosts
+echo "::1 localhost" >> /etc/hosts
+echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
+
+echo "---------------------------------------------"
+echo "ROOT PASSWORD"
+echo "---------------------------------------------"
+
+passwd
+sleep 1
+
+echo "---------------------------------------------"
+echo "INSTALL ADDITIONAL TOOLS"
+echo "---------------------------------------------"
+
+pacman -S grub \
+          grub-btrfs \
+          grub-customizer \
+          efibootmgr \
+          networkmanager \
+          network-manager-applet \
+          wireless_tools \
+          wpa_supplicant \
+          dialog \
+          os-prober \
+          mtools \
+          dosfstools \
+          base-devel \
+          linux-headers \
+          reflector \
+          ntfs-3g \
+          dhcpcd \
+          flatpak
+
+sleep 1
+
+echo "---------------------------------------------"
+echo "SETUP BOOTLOADER"
+echo "---------------------------------------------"
+
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH_GRUB
+sleep 1
+grub-mkconfig -o /boot/grub/grub.cfg
+sleep 1
+systemctl enable dhcpcd
+sleep 1
+systemctl enable NetworkManager
+sleep 1
+
+echo "---------------------------------------------"
+echo "CREATE USER"
+echo "---------------------------------------------"
+
+useradd -mG wheel,audio,video,optical,storage $NEW_USER_NAME
+sleep 1
+
+echo "---------------------------------------------"
+echo "USER PASSWORD"
+echo "---------------------------------------------"
+
+passwd $NEW_USER_NAME
+sleep 1
+EDITOR=nano visudo
+sleep 1
+
+echo "---------------------------------------------"
+echo "DOWNLOADING SNAPPER INIT SCRIPT"
+echo "---------------------------------------------"
+
+wget tomasrejhons.github.io/malis-snapper
+
+echo "---------------------------------------------"
+echo "DOWNLOADING ARCH-DI SCRIPT"
+echo "---------------------------------------------"
+
+wget archdi.sf.net/archdi
+
+echo "---------------------------------------------"
+echo "DON'T FORGET TO exit, umount -a and reboot !!!"
+echo "---------------------------------------------"
+
+    © 2020 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
