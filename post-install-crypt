@@ -80,9 +80,9 @@ echo "---------------------------------------------"
 
 nvim /etc/default/grub
 # Edit /etc/default/grub, add GRUB_ENABLE_CRYPTODISK=y and GRUB_DISABLE_SUBMENU=y
-#GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda1:archlinux:allow-discards"
+#GRUB_CMDLINE_LINUX="cryptdevice=/dev/vda1:system:allow-discards"
 sleep 1
-grub-install --target=i386-pc $DRIVE
+grub-install --target=i386-pc --force $DRIVE
 sleep 1
 grub-mkconfig -o /boot/grub/grub.cfg
 sleep 1
