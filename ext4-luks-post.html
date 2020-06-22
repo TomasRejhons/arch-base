@@ -1,0 +1,65 @@
+#!/bin/bash
+
+NEWHOSTNAME=archblue
+
+echo "---------------------------------------------"
+echo "CREATE SWAPFILE"
+echo "---------------------------------------------"
+
+fallocate -l 8GB /swapfile
+sleep 1
+chmod 600 /swapfile
+sleep 1
+mkswap /swapfile
+sleep 1
+swapon /swapfile
+sleep 1
+echo "/swapfile none swap sw 0 0" >> /etc/fstab
+sleep 1
+vim /etc/fstab
+sleep 1
+
+echo "---------------------------------------------"
+echo "ORDINARY BORING SETUP"
+echo "---------------------------------------------"
+
+ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
+sleep 1
+hwclock --systohc
+sleep 1
+vim /etc/locale.gen
+sleep 1
+locale-gen
+sleep 1
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "$NEWHOSTNAME" >> /etc/hostname
+echo "127.0.0.1 localhost" >> /etc/hosts
+echo "::1 localhost" >> /etc/hosts
+echo "127.0.1.1 $NEWHOSTNAME.localdomain $NEWHOSTNAME" >> /etc/hosts
+
+echo "---------------------------------------------"
+echo "ROOT PASSWD"
+echo "---------------------------------------------"
+
+passwd
+sleep 1
+
+echo "---------------------------------------------"
+echo "INSTALL ADDITIONAL TOOLS"
+echo "---------------------------------------------"
+
+pacman -S grub \
+          efibootmgr \
+          networkmanager \
+          network-manager-applet \
+          wireless_tools \
+          wpa_supplicant \
+          dialog \
+          os-prober \
+          mtools \
+          dosfstools \
+          base-devel \
+          linux-headers \
+          dhcpcd
+
+sleep 1
