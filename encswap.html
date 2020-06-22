@@ -36,6 +36,7 @@ sgdisk --clear \
 echo "---------------------------------------------"
 echo "SETUP ENCRYPTION"
 echo "---------------------------------------------"
+
 sleep 1
 modprobe dm-crypt
 sleep 1
@@ -45,18 +46,22 @@ crypsetup luksFormat -v -s 512 -h sha512 /dev/disk/by-partlabel/cryptsystem
 sleep 1
 cryptsetup open /dev/disk/by-partlabel/cryptsystem archsystem
 sleep 1
+
 echo "---------------------------------------------"
 echo "INIT FILESYSTEM"
 echo "---------------------------------------------"
+
 mkfs.fat -F32 /dev/disk/by-partlabel/EFI
 sleep 1
 mkfs.ext4 /dev/disk/by-partlabel/BOOT
 sleep 1
 mkfs.ext4 /dev/mapper/archsystem
 sleep 1
+
 echo "---------------------------------------------"
 echo "MOUNT FILESYSTEM"
 echo "---------------------------------------------"
+
 mount /dev/mapper/archsystem /mnt
 sleep 1
 mkdir /mnt/boot
@@ -67,3 +72,15 @@ mkdir /mnt/boot/efi
 sleep 1
 mount /dev/disk/by-partlabel/EFI /mnt/boot/efi
 sleep 1
+
+echo "---------------------------------------------"
+echo "INSTALL BASE SYSTEM"
+echo "---------------------------------------------"
+
+pacstrap /mnt base base-devel linux linux-firmware vim
+sleep 1
+genfstab -L /mnt >> /mnt/etc/fstab
+sleep 1
+vim /mnt/etc/fstab
+sleep 1
+arch-chroot /mnt
