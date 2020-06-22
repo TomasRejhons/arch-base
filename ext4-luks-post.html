@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NEWHOSTNAME=archblue
+NEW_USER_NAME=tomas
 
 echo "---------------------------------------------"
 echo "CREATE SWAPFILE"
@@ -63,3 +64,47 @@ pacman -S grub \
           dhcpcd
 
 sleep 1
+
+echo "---------------------------------------------"
+echo "CONFIGURE BOOTLOADER"
+echo "---------------------------------------------"
+
+# GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"
+vim /etc/default/grub
+sleep 1
+#HOOKS=... block encrypt filesystem ...
+vim /etc/mkinitcpio.conf
+sleep 1
+mkinitcpio -p linux
+sleep 1
+grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=ARCHGRUB
+sleep 1
+grub-mkconfig -o /boot/grub/grub.cfg
+sleep 1
+
+echo "---------------------------------------------"
+echo "CREATE USER"
+echo "---------------------------------------------"
+
+useradd -mG wheel,audio,video,optical,storage $NEW_USER_NAME
+sleep 1
+
+echo "---------------------------------------------"
+echo "USER PASSWORD"
+echo "---------------------------------------------"
+
+passwd $NEW_USER_NAME
+sleep 1
+EDITOR=nvim visudo
+sleep 1
+
+echo "---------------------------------------------"
+echo "DOWNLOADING ARCH-DI SCRIPT"
+echo "---------------------------------------------"
+
+wget archdi.sf.net/archdi
+
+echo "---------------------------------------------"
+echo "DON'T FORGET TO exit, umount -a and reboot !!!"
+echo "---------------------------------------------"
+
