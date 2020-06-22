@@ -4,23 +4,6 @@ NEWHOSTNAME=archblue
 NEW_USER_NAME=tomas
 
 echo "---------------------------------------------"
-echo "CREATE SWAPFILE"
-echo "---------------------------------------------"
-
-fallocate -l 8GB /swapfile
-sleep 1
-chmod 600 /swapfile
-sleep 1
-mkswap /swapfile
-sleep 1
-swapon /swapfile
-sleep 1
-echo "/swapfile none swap sw 0 0" >> /etc/fstab
-sleep 1
-vim /etc/fstab
-sleep 1
-
-echo "---------------------------------------------"
 echo "ORDINARY BORING SETUP"
 echo "---------------------------------------------"
 
@@ -62,7 +45,8 @@ pacman -S grub \
           base-devel \
           linux-headers \
           dhcpcd \
-          wget
+          wget \
+          systemd-swap
 
 sleep 1
 
@@ -82,6 +66,16 @@ sleep 1
 grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=ARCHGRUB
 sleep 1
 grub-mkconfig -o /boot/grub/grub.cfg
+sleep 1
+
+echo "---------------------------------------------"
+echo "SWAP"
+echo "---------------------------------------------"
+
+vim /etc/systemd/swap.conf
+systemctl enable systemd-swap
+sleep 1
+systemctl start systemd-swap
 sleep 1
 
 echo "---------------------------------------------"
