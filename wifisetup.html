@@ -6,6 +6,6 @@ PASSWD=FbiSurveillanceVan1234
 
 ip link set $INTERFACE up
 sleep 1
-wpa_supplicant -B -i interface -c <(wpa_passphrase $SSID $PASSWD)
+wpa_supplicant -B -i $INTERFACE -c <(wpa_passphrase $SSID $PASSWD)
 sleep 1
 dhcpcd
