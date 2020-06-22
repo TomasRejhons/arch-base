@@ -42,7 +42,7 @@ modprobe dm-crypt
 sleep 1
 modprobe dm-mod
 sleep 1
-crypsetup luksFormat -v -s 512 -h sha512 /dev/disk/by-partlabel/cryptsystem
+cryptsetup luksFormat -v -s 512 -h sha512 /dev/disk/by-partlabel/cryptsystem
 sleep 1
 cryptsetup open /dev/disk/by-partlabel/cryptsystem archsystem
 sleep 1
