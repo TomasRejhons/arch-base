@@ -8,6 +8,8 @@ DRIVE_EFI_PART=/dev/vda1
 DRIVE_SWAP_PART=/dev/vda2
 DRIVE_SYSTEM_PART=/dev/vda3
 
+USE_BTRFS=false
+
 echo "---------------------------------------------"
 echo "OPTIMIZING MIRRORLIST"
 echo "---------------------------------------------"
@@ -36,13 +38,19 @@ mkswap -L SWAP $DRIVE_SWAP_PART
 sleep 1
 swapon $DRIVE_SWAP_PART
 sleep 1
-mkfs.btrfs -f -L SYSTEM $DRIVE_SYSTEM_PART
+if [ "$USE_BTRFS" = true ] ; then
+    mkfs.btrfs -f -L SYSTEM $DRIVE_SYSTEM_PART
+else
+    mkfs.ext4 -L SYSTEM $DRIVE_SYSTEM_PART
+fi
+
 sleep 1
 
 echo "---------------------------------------------"
 echo "MOUNT FILESYSTEM"
 echo "---------------------------------------------"
 
+if [ "$USE_BTRFS" = true ] ; then
 mount $DRIVE_SYSTEM_PART /mnt
 sleep 1
 btrfs su cr /mnt/@
@@ -67,6 +75,10 @@ mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/va
 sleep 1
 mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
 sleep 1
+else
+mount $DRIVE_SYSTEM_PART /mnt
+sleep 1
+fi
 
 echo "---------------------------------------------"
 echo "INSTALL BASE SYSTEM"
