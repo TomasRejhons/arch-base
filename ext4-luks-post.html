@@ -75,7 +75,9 @@ echo "---------------------------------------------"
 vim /etc/systemd/swap.conf
 systemctl enable systemd-swap
 sleep 1
-systemctl start systemd-swap
+systemctl enable dhcpcd
+sleep 1
+systemctl enable NetworkManager
 sleep 1
 
 echo "---------------------------------------------"
