@@ -50,7 +50,7 @@ function setupFilesystemExt4
   sleep 1
   mkfs.ext4 /dev/disk/by-partlabel/BOOT
   sleep 1
-  if ENCRYPT_SYSTEM; then
+  if [ENCRYPT_SYSTEM=true]; then
     mkfs.ext4 /dev/mapper/archsystem
     sleep 1
     mount /dev/mapper/archsystem /mnt
@@ -93,7 +93,7 @@ function installSystem
 
 prepareInstall
 createPartitions
-if ENCRYPT_SYSTEM; then
+if [ENCRYPT_SYSTEM=true]; then
   setupEncryption
 fi
 setupFilesystemExt4
