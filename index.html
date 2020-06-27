@@ -50,7 +50,7 @@ function setupFilesystemExt4
   sleep 1
   mkfs.ext4 /dev/disk/by-partlabel/BOOT
   sleep 1
-  if [$ENCRYPT_SYSTEM=true]; then
+  if [ "$ENCRYPT_SYSTEM" = true ]; then
     mkfs.ext4 /dev/mapper/archsystem
     sleep 1
     mount /dev/mapper/archsystem /mnt
@@ -81,7 +81,7 @@ function setupFilesystemBtrfs
   sleep 1
   mkfs.ext4 /dev/disk/by-partlabel/BOOT
   sleep 1
-  if [$ENCRYPT_SYSTEM=true]; then
+  if [ "$ENCRYPT_SYSTEM" = true ]; then
     mkfs.btrfs /dev/mapper/archsystem
     sleep 1
     mount /dev/mapper/archsystem /mnt
@@ -145,11 +145,11 @@ function installSystem
 prepareInstall
 createPartitions
 
-if [$ENCRYPT_SYSTEM=true]; then
+if [ "$ENCRYPT_SYSTEM" = true ]; then
   setupEncryption
 fi
 
-if [$USE_BTRFS=true]; then
+if [ "$USE_BTRFS" = true ]; then
   setupFilesystemBtrfs
 else
   setupFilesystemExt4
