@@ -86,6 +86,8 @@ function installSystem
   sleep 1
   cp ext4-luks-post /mnt/post-install
   sleep 1
+  cp config /mnt/malis-config
+  sleep 1
   arch-chroot /mnt
 }
 
