@@ -74,6 +74,57 @@ function setupFilesystemExt4
   sleep 1
 }
 
+function setupFilesystemBtrfs
+{
+  # Init Filesystem
+  mkfs.fat -F32 /dev/disk/by-partlabel/EFI
+  sleep 1
+  mkfs.ext4 /dev/disk/by-partlabel/BOOT
+  sleep 1
+  if [ENCRYPT_SYSTEM=true]; then
+    mkfs.btrfs /dev/mapper/archsystem
+    sleep 1
+    mount /dev/mapper/archsystem /mnt
+    sleep 1
+  else
+    mkfs.btrfs /dev/disk/by-partlabel/SYSTEM
+    sleep 1
+    mount /dev/disk/by-partlabel/SYSTEM /mnt
+    sleep 1
+  fi
+  sleep 1
+  
+  # Mount Filesystem
+  mkdir /mnt/boot
+  sleep 1
+  mount /dev/disk/by-partlabel/BOOT /mnt/boot
+  sleep 1
+  mkdir /mnt/boot/EFI
+  sleep 1
+  mount /dev/disk/by-partlabel/EFI /mnt/boot/EFI
+  sleep 1
+  btrfs su cr /mnt/@
+  sleep 1
+  btrfs su cr /mnt/@home
+  sleep 1
+  btrfs su cr /mnt/@var
+  sleep 1
+  btrfs su cr /mnt/@snapshots
+  sleep 1
+  umount /mnt
+  sleep 1
+  mount -o noatime,compress=lzo,space_cache,subvol=@ $DRIVE_SYSTEM_PART /mnt
+  sleep 1
+  mkdir -p /mnt/{home,var,.snapshots}
+  sleep 1
+  mount -o noatime,compress=lzo,space_cache,subvol=@home $DRIVE_SYSTEM_PART /mnt/home
+  sleep 1
+  mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/var
+  sleep 1
+  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
+  sleep 1
+}
+
 function installSystem
 {
   pacstrap /mnt base base-devel linux linux-firmware vim
@@ -93,8 +144,15 @@ function installSystem
 
 prepareInstall
 createPartitions
+
 if [ENCRYPT_SYSTEM=true]; then
   setupEncryption
 fi
-setupFilesystemExt4
+
+if [USE_BTRFS=true]; then
+  setupFilesystemBtrfs
+else
+  setupFilesystemExt4
+fi
+
 installSystem
