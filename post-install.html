@@ -37,7 +37,9 @@ function setupUsers
   echo "CREATE USER"
   echo "---------------------------------------------"
 
-  useradd -m -g users -G wheel,games,power,optical,storage,scanner,lp,audio,video -s /bin/bash $NEW_USER_NAME
+  useradd -m $NEW_USER_NAME
+  sleep 1
+  usermod -aG wheel,games,power,optical,storage,scanner,lp,audio,video $NEW_USER_NAME
   sleep 1
 
   echo "---------------------------------------------"
