@@ -60,6 +60,7 @@ function installSoftware
 
   if [ "$USE_BTRFS" = true ]; then
     pacman -Syu grub-btrfs /
+                btrfs-progs /
                 snapper
   fi
 
