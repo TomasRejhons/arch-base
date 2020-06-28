@@ -4,6 +4,10 @@ source config
 
 function configureSystemBasics
 {
+  echo "---------------------------------------------"
+  echo "BASIC SETUP"
+  echo "---------------------------------------------"
+
   ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
   sleep 1
   hwclock --systohc
@@ -20,4 +24,65 @@ function configureSystemBasics
   sleep 1
 }
 
+function setupUsers
+{
+  echo "---------------------------------------------"
+  echo "ROOT PASSWORD"
+  echo "---------------------------------------------"
+
+  passwd
+  sleep 1
+  
+  echo "---------------------------------------------"
+  echo "CREATE USER"
+  echo "---------------------------------------------"
+
+  useradd -m -g users -G wheel,games,power,optical,storage,scanner,lp,audio,video -s /bin/bash $NEW_USER_NAME
+  sleep 1
+
+  echo "---------------------------------------------"
+  echo "USER PASSWORD"
+  echo "---------------------------------------------"
+
+  passwd $NEW_USER_NAME
+  sleep 1
+  EDITOR=vim visudo
+  sleep 1
+}
+
+function installSoftware
+{
+  echo "---------------------------------------------"
+  echo "INSTALL ADDITIONAL TOOLS"
+  echo "---------------------------------------------"
+
+  if [ "$USE_BTRFS" = true ]; then
+    pacman -Syu grub-btrfs /
+                snapper
+  fi
+
+  pacman -Syu linux-zen \
+              linux-zen-headers \
+              linux-headers \
+              grub \
+              grub-customizer \
+              efibootmgr \
+              networkmanager \
+              network-manager-applet \
+              wireless_tools \
+              wpa_supplicant \
+              dialog \
+              os-prober \
+              mtools \
+              dosfstools \
+              base-devel \
+              reflector \
+              ntfs-3g \
+              dhcpcd \
+              flatpak
+
+  sleep 1
+}
+
 configureSystemBasics
+setupUsers
