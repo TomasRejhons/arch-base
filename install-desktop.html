@@ -1,18 +1,27 @@
 #!/bin/bash
 
+function installYay
+{
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  cd ..
+  rm -rf yay
+}
+
 function installGnome
 {
-  pacman -Syu gnome \
-              gnome-extra
+  sudo pacman -Syu gnome \
+                   gnome-extra
 }
 
 function installAwesome
 {
-  pacman -Syu awesome \
-              rofi \
-              compton \
-              i3lock-fancy \
-              xclip
+  sudo pacman -Syu awesome \
+                   rofi \
+                   compton \
+                   i3lock-fancy \
+                   xclip
                    
   yay -S awesome-gnome
   
@@ -21,13 +30,13 @@ function installAwesome
 
 function setupLightDM
 {
-  pacman -Syu lightdm \
-              lightdm-webkit2-greeter \
-              lightdm-webkit-theme-litarvan \
-              mugshot
+  sudo pacman -Syu lightdm \
+                   lightdm-webkit2-greeter \
+                   lightdm-webkit-theme-litarvan \
+                   mugshot
               
-  systemctl disable gdm
-  systemctl enable lightdm
+  sudo systemctl disable gdm
+  sudo systemctl enable lightdm
   
   yay -S lightdm-webkit-theme-aether
 }
