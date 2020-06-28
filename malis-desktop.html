@@ -1,0 +1,37 @@
+#!/bin/bash
+
+function installGnome
+{
+  pacman -Syu gnome \
+              gnome-extra
+}
+
+function installAwesome
+{
+  pacman -Syu awesome \
+              rofi \
+              compton \
+              i3lock-fancy \
+              xclip
+                   
+  yay -S awesome-gnome
+  
+  git clone https://github.com/TomasRejhons/material-awesome.git ~/.config/awesome
+}
+
+function setupLightDM
+{
+  pacman -Syu lightdm \
+              lightdm-webkit2-greeter \
+              lightdm-webkit-theme-litarvan \
+              mugshot
+              
+  systemctl disable gdm
+  systemctl enable lightdm
+  
+  yay -S lightdm-webkit-theme-aether
+}
+
+installGnome
+installAwesome
+setupLightDM
