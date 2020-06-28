@@ -53,7 +53,7 @@ function setupUsers
 function installSoftware
 {
   echo "---------------------------------------------"
-  echo "INSTALL ADDITIONAL TOOLS"
+  echo "INSTALL ADDITIONAL SOFTWARE"
   echo "---------------------------------------------"
 
   if [ "$USE_BTRFS" = true ]; then
@@ -79,10 +79,76 @@ function installSoftware
               reflector \
               ntfs-3g \
               dhcpcd \
-              flatpak
+              flatpak \
+              systemd-swap \
+              git
 
   sleep 1
 }
 
+function setupBootloader
+{
+  echo "---------------------------------------------"
+  echo "CONFIGURE BOOTLOADER"
+  echo "---------------------------------------------"
+
+  if [ "$ENCRYPT_SYSTEM" = true ]; then
+    # GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"
+    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"' >> /etc/default/grub
+    vim /etc/default/grub
+    sleep 1
+    #HOOKS=... block encrypt filesystem ...
+    vim /etc/mkinitcpio.conf
+    sleep 1
+  fi
+
+  mkinitcpio -p linux
+  sleep 1
+  grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=ARCHGRUB
+  sleep 1
+  grub-mkconfig -o /boot/grub/grub.cfg
+  sleep 1
+}
+
+function setupServices
+{
+  systemctl enable dhcpcd
+  sleep 1
+  systemctl enable NetworkManager
+  sleep 1
+  vim /etc/systemd/swap.conf
+  echo "zram_enabled=0" >> /etc/systemd/swap.conf
+  echo "zswap_enabled=1" >> /etc/systemd/swap.conf
+  echo "swapfc_enabled=1" >> /etc/systemd/swap.conf
+  systemctl enable systemd-swap
+  sleep 1
+  grub-mkconfig -o /boot/grub/grub.cfg
+  sleep 1
+  mkinitcpio -p linux
+}
+
+function downloadAdditionalScripts
+{
+  echo "---------------------------------------------"
+  echo "DOWNLOADING SNAPPER INIT SCRIPT"
+  echo "---------------------------------------------"
+
+  wget tomasrejhons.github.io/malis/snapper-setup
+
+  echo "---------------------------------------------"
+  echo "DOWNLOADING ARCH-DI SCRIPT"
+  echo "---------------------------------------------"
+
+  wget archdi.sf.net/archdi
+}
+
 configureSystemBasics
+installSoftware
 setupUsers
+setupBootloader
+setupServices
+downloadAdditionalScripts
+
+echo "---------------------------------------------"
+echo "DON'T FORGET TO exit, umount -a and reboot !!!"
+echo "---------------------------------------------"
