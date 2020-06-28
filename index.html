@@ -95,14 +95,6 @@ function setupFilesystemBtrfs
   sleep 1
   
   # Mount Filesystem
-  mkdir /mnt/boot
-  sleep 1
-  mount /dev/disk/by-partlabel/BOOT /mnt/boot
-  sleep 1
-  mkdir /mnt/boot/EFI
-  sleep 1
-  mount /dev/disk/by-partlabel/EFI /mnt/boot/EFI
-  sleep 1
   btrfs su cr /mnt/@
   sleep 1
   btrfs su cr /mnt/@home
@@ -122,6 +114,14 @@ function setupFilesystemBtrfs
   mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/var
   sleep 1
   mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
+  sleep 1
+  mkdir /mnt/boot
+  sleep 1
+  mount /dev/disk/by-partlabel/BOOT /mnt/boot
+  sleep 1
+  mkdir /mnt/boot/EFI
+  sleep 1
+  mount /dev/disk/by-partlabel/EFI /mnt/boot/EFI
   sleep 1
 }
 
