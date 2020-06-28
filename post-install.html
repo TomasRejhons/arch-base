@@ -13,10 +13,10 @@ function configureSystemBasics
   locale-gen
   sleep 1
   echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-  echo "archblue" >> /etc/hostname
+  echo $NEW_HOST_NAME >> /etc/hostname
   echo "127.0.0.1 localhost" >> /etc/hosts
   echo "::1 localhost" >> /etc/hosts
-  echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
+  echo "127.0.1.1 $NEW_HOST_NAME.localdomain $NEW_HOST_NAME" >> /etc/hosts
   sleep 1
 }
 
