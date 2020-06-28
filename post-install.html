@@ -121,7 +121,6 @@ function setupServices
   sleep 1
   systemctl enable NetworkManager
   sleep 1
-  vim /etc/systemd/swap.conf
   echo "zram_enabled=0" >> /etc/systemd/swap.conf
   echo "zswap_enabled=1" >> /etc/systemd/swap.conf
   echo "swapfc_enabled=1" >> /etc/systemd/swap.conf
