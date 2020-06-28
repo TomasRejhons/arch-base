@@ -86,7 +86,10 @@ function installSoftware
             systemd-swap \
             git \
             mc \
-            wget
+            wget \
+            apparmor \
+            code \
+            firejail
 
   sleep 1
 }
@@ -99,7 +102,7 @@ function setupBootloader
 
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     # GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"
-    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"' >> /etc/default/grub
+    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem apparmor=1 lsm=lockdown,yama,apparmor"' >> /etc/default/grub
     vim /etc/default/grub
     sleep 1
     #HOOKS=... block encrypt filesystem ...
@@ -117,6 +120,10 @@ function setupBootloader
 
 function setupServices
 {
+  systemctl enable apparmor
+  sleep 1
+  firecfg
+  sleep 1
   systemctl enable dhcpcd
   sleep 1
   systemctl enable NetworkManager
