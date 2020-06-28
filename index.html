@@ -105,15 +105,15 @@ function setupFilesystemBtrfs
   sleep 1
   umount /mnt
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@ $DRIVE_SYSTEM_PART /mnt
+  mount -o noatime,compress=lzo,space_cache,subvol=@ /dev/disk/by-partlabel/SYSTEM /mnt
   sleep 1
   mkdir -p /mnt/{home,var,.snapshots}
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@home $DRIVE_SYSTEM_PART /mnt/home
+  mount -o noatime,compress=lzo,space_cache,subvol=@home /dev/disk/by-partlabel/SYSTEM /mnt/home
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@var $DRIVE_SYSTEM_PART /mnt/var
+  mount -o noatime,compress=lzo,space_cache,subvol=@var /dev/disk/by-partlabel/SYSTEM /mnt/var
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $DRIVE_SYSTEM_PART /mnt/.snapshots
+  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots /dev/disk/by-partlabel/SYSTEM /mnt/.snapshots
   sleep 1
   mkdir /mnt/boot
   sleep 1
