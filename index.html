@@ -51,16 +51,13 @@ function setupFilesystemExt4
   mkfs.ext4 /dev/disk/by-partlabel/BOOT
   sleep 1
   if [ "$ENCRYPT_SYSTEM" = true ]; then
-    mkfs.ext4 /dev/mapper/archsystem
-    sleep 1
-    mount /dev/mapper/archsystem /mnt
-    sleep 1
+    SYSTEM_DRIVE=/dev/mapper/archsystem
   else
-    mkfs.ext4 /dev/disk/by-partlabel/SYSTEM
-    sleep 1
-    mount /dev/disk/by-partlabel/SYSTEM /mnt
-    sleep 1
+    SYSTEM_DRIVE=/dev/disk/by-partlabel/SYSTEM
   fi
+  mkfs.ext4 $SYSTEM_DRIVE
+  sleep 1
+  mount $SYSTEM_DRIVE /mnt
   sleep 1
 
   # Mount Filesystem
@@ -82,16 +79,13 @@ function setupFilesystemBtrfs
   mkfs.ext4 /dev/disk/by-partlabel/BOOT
   sleep 1
   if [ "$ENCRYPT_SYSTEM" = true ]; then
-    mkfs.btrfs /dev/mapper/archsystem
-    sleep 1
-    mount /dev/mapper/archsystem /mnt
-    sleep 1
+    SYSTEM_DRIVE=/dev/mapper/archsystem
   else
-    mkfs.btrfs /dev/disk/by-partlabel/SYSTEM
-    sleep 1
-    mount /dev/disk/by-partlabel/SYSTEM /mnt
-    sleep 1
+    SYSTEM_DRIVE=/dev/disk/by-partlabel/SYSTEM
   fi
+  mkfs.btrfs -L SYSTEM $SYSTEM_DRIVE
+  sleep 1
+  mount $SYSTEM_DRIVE /mnt
   sleep 1
   
   # Mount Filesystem
@@ -105,15 +99,15 @@ function setupFilesystemBtrfs
   sleep 1
   umount /mnt
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@ /dev/disk/by-partlabel/SYSTEM /mnt
+  mount -o noatime,compress=lzo,space_cache,subvol=@ $SYSTEM_DRIVE /mnt
   sleep 1
   mkdir -p /mnt/{home,var,.snapshots}
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@home /dev/disk/by-partlabel/SYSTEM /mnt/home
+  mount -o noatime,compress=lzo,space_cache,subvol=@home $SYSTEM_DRIVE /mnt/home
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@var /dev/disk/by-partlabel/SYSTEM /mnt/var
+  mount -o noatime,compress=lzo,space_cache,subvol=@var $SYSTEM_DRIVE /mnt/var
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots /dev/disk/by-partlabel/SYSTEM /mnt/.snapshots
+  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $SYSTEM_DRIVE /mnt/.snapshots
   sleep 1
   mkdir /mnt/boot
   sleep 1
