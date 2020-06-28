@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config
+source malis-config
 
 function configureSystemBasics
 {
@@ -84,10 +84,15 @@ function installSoftware
               flatpak \
               systemd-swap \
               git \
-              yay \
               mc
 
   sleep 1
+  
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  cd ..
+  rm -rf yay
 }
 
 function setupBootloader
