@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source config
+
+function configureSystemBasics
+{
+  ln -sf /usr/share/zoneinfo/Europe/Prague /etc/localtime
+  sleep 1
+  hwclock --systohc
+  sleep 1
+  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+  sleep 1
+  locale-gen
+  sleep 1
+  echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+  echo "archblue" >> /etc/hostname
+  echo "127.0.0.1 localhost" >> /etc/hosts
+  echo "::1 localhost" >> /etc/hosts
+  echo "127.0.1.1 archblue.localdomain  archblue" >> /etc/hosts
+  sleep 1
+}
+
+configureSystemBasics
