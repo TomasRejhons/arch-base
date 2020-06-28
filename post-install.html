@@ -59,34 +59,34 @@ function installSoftware
   echo "---------------------------------------------"
 
   if [ "$USE_BTRFS" = true ]; then
-    pacman -Syu grub-btrfs /
-                btrfs-progs /
-                snapper
+    pacman -S grub-btrfs \
+              btrfs-progs \
+              snapper
   fi
 
-  pacman -Syu linux-zen \
-              linux-zen-headers \
-              linux-headers \
-              grub \
-              grub-customizer \
-              efibootmgr \
-              networkmanager \
-              network-manager-applet \
-              wireless_tools \
-              wpa_supplicant \
-              dialog \
-              os-prober \
-              mtools \
-              dosfstools \
-              base-devel \
-              reflector \
-              ntfs-3g \
-              dhcpcd \
-              flatpak \
-              systemd-swap \
-              git \
-              mc \
-              wget
+  pacman -S linux-zen \
+            linux-zen-headers \
+            linux-headers \
+            grub \
+            grub-customizer \
+            efibootmgr \
+            networkmanager \
+            network-manager-applet \
+            wireless_tools \
+            wpa_supplicant \
+            dialog \
+            os-prober \
+            mtools \
+            dosfstools \
+            base-devel \
+            reflector \
+            ntfs-3g \
+            dhcpcd \
+            flatpak \
+            systemd-swap \
+            git \
+            mc \
+            wget
 
   sleep 1
 }
