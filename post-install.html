@@ -87,9 +87,7 @@ function installSoftware
             git \
             mc \
             wget \
-            apparmor \
-            code \
-            firejail
+            code 
 
   sleep 1
 }
@@ -102,7 +100,7 @@ function setupBootloader
 
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     # GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"
-    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem apparmor=1 lsm=lockdown,yama,apparmor"' >> /etc/default/grub
+    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"' >> /etc/default/grub
     vim /etc/default/grub
     sleep 1
     #HOOKS=... block encrypt filesystem ...
