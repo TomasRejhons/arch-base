@@ -118,10 +118,6 @@ function setupBootloader
 
 function setupServices
 {
-  systemctl enable apparmor
-  sleep 1
-  firecfg
-  sleep 1
   systemctl enable dhcpcd
   sleep 1
   systemctl enable NetworkManager
