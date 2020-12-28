@@ -30,8 +30,8 @@ Learn the manual installation process first! https://wiki.archlinux.org/index.ph
 Do a few dry runs on a virtual machine!
 
 - Boot Arch ISO
-- Run <code>bash wget tomasrejhons.github.io/malis</code>
-- Run <code>bash wget tomasrejhons.github.io/malis/config</code>
+- Run <code>curl -LJO tomasrejhons.github.io/malis</code>
+- Run <code>curl -LJO tomasrejhons.github.io/malis/config</code>
 - Examine and edit malis config (Edit the drive you want to install the system on and mirror servers location etc)
 - Run <code>bash malis</code>
 - Examine and edit post-install (Edit the user name)
