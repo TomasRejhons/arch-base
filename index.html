@@ -29,7 +29,7 @@ function createPartitions
            $DRIVE
            
   sleep 1
-  blkid $DRIVE >> config
+  blkid /dev/disk/by-partlabel/SYSTEM >> config
   sleep 1
 }
 
