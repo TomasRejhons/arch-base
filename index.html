@@ -29,7 +29,8 @@ function createPartitions
            $DRIVE
            
   sleep 1
-  blkid /dev/disk/by-partlabel/SYSTEM >> config
+  blkid $DRIVE3 >> config
+  blkid /dev/sda3 >> config
   sleep 1
 }
 
