@@ -103,7 +103,7 @@ function setupBootloader
     # HOOKS=... block encrypt filesystem ...
     #
     # FOR BTRFS
-    # HOOKS=(base systemd autodetect modconf block sd-encrypt btrfs resume filesystems keyboard fsck)
+    # HOOKS=(...block encrypt filesystems...)
     vim /etc/mkinitcpio.conf
     sleep 1
   fi
