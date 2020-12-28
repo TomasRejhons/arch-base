@@ -139,19 +139,19 @@ function downloadAdditionalScripts
   echo "DOWNLOADING SNAPPER INIT SCRIPT"
   echo "---------------------------------------------"
 
-  wget tomasrejhons.github.io/malis/snapper-setup
+  curl -LJO tomasrejhons.github.io/malis/snapper-setup
 
   echo "---------------------------------------------"
   echo "DOWNLOADING DESKTOP INSTALL SCRIPT"
   echo "---------------------------------------------"
 
-  wget tomasrejhons.github.io/malis/install-desktop
+  curl -LJO tomasrejhons.github.io/malis/install-desktop
 
   echo "---------------------------------------------"
   echo "DOWNLOADING ARCH-DI SCRIPT"
   echo "---------------------------------------------"
 
-  wget archdi.sf.net/archdi
+  curl -LJO archdi.sf.net/archdi
 }
 
 configureSystemBasics
