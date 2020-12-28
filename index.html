@@ -121,7 +121,7 @@ function setupFilesystemBtrfs
 
 function installSystem
 {
-  pacstrap /mnt base base-devel linux linux-firmware vim
+  pacstrap /mnt base base-devel linux linux-headers linux-firmware vim wget
   sleep 1
   genfstab -L /mnt >> /mnt/etc/fstab
   sleep 1
