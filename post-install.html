@@ -95,12 +95,13 @@ function setupBootloader
   echo "---------------------------------------------"
 
   if [ "$ENCRYPT_SYSTEM" = true ]; then
-    # GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"
-    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/cryptsystem:archsystem"' >> /etc/default/grub
+    # GRUB_CMDLINE_LINUX="cryptdevice=UUID=abc123yz-abc1-abc2-abcd1234wxyz:root"
+    echo 'GRUB_ENABLE_CRYPTODISK=y' >> /etc/default/grub
+    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/SYSTEM:root"' >> /etc/default/grub
     vim /etc/default/grub
     sleep 1
     # FOR EXT4:
-    # HOOKS=... block encrypt filesystem ...
+    # HOOKS=... block encrypt filesystems ...
     #
     # FOR BTRFS
     # HOOKS=(...block encrypt filesystems...)
