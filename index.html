@@ -83,7 +83,7 @@ function setupFilesystemBtrfs
   else
     SYSTEM_DRIVE=/dev/disk/by-partlabel/SYSTEM
   fi
-  mkfs.btrfs -f -L SYSTEM $SYSTEM_DRIVE
+  mkfs.btrfs -f -L archbtrfs $SYSTEM_DRIVE
   sleep 1
   mount $SYSTEM_DRIVE /mnt
   sleep 1
