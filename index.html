@@ -29,6 +29,8 @@ function createPartitions
            $DRIVE
            
   sleep 1
+  blkid $DRIVE >> config
+  sleep 1
 }
 
 function setupEncryption
