@@ -2,22 +2,6 @@
 
 source config
 
-function prepareInstall 
-{
-  timedatectl set-ntp true
-  sleep 1
-
-  # Optiomization of mirror list for best performance
-  pacman -Syyy
-  sleep 1
-  pacman -S reflector
-  sleep 1
-  reflector -c $MIRRORS_LOCATION -a 10 --sort rate --save /etc/pacman.d/mirrorlist
-  sleep 1
-  pacman -Syyy
-  sleep 1
-}
-
 function createPartitions
 {
   sgdisk --zap-all $DRIVE
@@ -139,7 +123,6 @@ function installSystem
   arch-chroot /mnt
 }
 
-prepareInstall
 createPartitions
 
 if [ "$ENCRYPT_SYSTEM" = true ]; then
