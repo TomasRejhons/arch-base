@@ -13,9 +13,6 @@ function createPartitions
            $DRIVE
            
   sleep 1
-  blkid $DRIVE3 >> config
-  blkid /dev/sda3 >> config
-  sleep 1
   # Init Filesystem
   mkfs.vfat -F32 /dev/disk/by-partlabel/EFI
   sleep 1
