@@ -112,7 +112,7 @@ function setupBootloader
   sleep 1
 }
 
-function setupServices
+function finishSetup
 {
   systemctl enable dhcpcd
   sleep 1
@@ -153,7 +153,7 @@ configureSystemBasics
 installSoftware
 setupUsers
 setupBootloader
-setupServices
+finishSetup
 downloadAdditionalScripts
 
 echo "---------------------------------------------"
