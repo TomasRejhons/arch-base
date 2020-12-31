@@ -16,6 +16,12 @@ function createPartitions
   blkid $DRIVE3 >> config
   blkid /dev/sda3 >> config
   sleep 1
+  # Init Filesystem
+  mkfs.vfat -F32 /dev/disk/by-partlabel/EFI
+  sleep 1
+  mkfs.ext4 /dev/disk/by-partlabel/BOOT
+  sleep 1
+  mkfs.ext4 /dev/disk/by-partlabel/SYSTEM
 }
 
 function setupEncryption
@@ -31,12 +37,7 @@ function setupEncryption
 }
 
 function setupFilesystemExt4
-{
-  # Init Filesystem
-  mkfs.fat -F32 /dev/disk/by-partlabel/EFI
-  sleep 1
-  mkfs.ext4 /dev/disk/by-partlabel/BOOT
-  sleep 1
+{  
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     SYSTEM_DRIVE=/dev/mapper/archsystem
   else
@@ -60,11 +61,6 @@ function setupFilesystemExt4
 
 function setupFilesystemBtrfs
 {
-  # Init Filesystem
-  mkfs.fat -F32 /dev/disk/by-partlabel/EFI
-  sleep 1
-  mkfs.ext4 /dev/disk/by-partlabel/BOOT
-  sleep 1
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     SYSTEM_DRIVE=/dev/mapper/archsystem
   else
