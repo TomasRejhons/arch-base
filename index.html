@@ -43,8 +43,6 @@ function setupFilesystemExt4
   else
     SYSTEM_DRIVE=/dev/disk/by-partlabel/SYSTEM
   fi
-  mkfs.ext4 $SYSTEM_DRIVE
-  sleep 1
   mount $SYSTEM_DRIVE /mnt
   sleep 1
 
