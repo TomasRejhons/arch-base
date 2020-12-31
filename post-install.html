@@ -58,16 +58,7 @@ function installSoftware
   echo "INSTALL ADDITIONAL SOFTWARE"
   echo "---------------------------------------------"
 
-  if [ "$USE_BTRFS" = true ]; then
-    pacman -S grub-btrfs \
-              btrfs-progs \
-              snapper
-  fi
-
-  pacman -S linux-zen \
-            linux-zen-headers \
-            linux-headers \
-            grub \
+  pacman -S grub \
             grub-customizer \
             efibootmgr \
             networkmanager \
@@ -78,14 +69,17 @@ function installSoftware
             os-prober \
             mtools \
             dosfstools \
-            base-devel \
             ntfs-3g \
             dhcpcd \
             systemd-swap \
             git \
-            wget
+            curl
 
-  sleep 1
+  if [ "$USE_BTRFS" = true ]; then
+    pacman -S grub-btrfs \
+              btrfs-progs \
+              snapper
+  fi
 }
 
 function setupBootloader
