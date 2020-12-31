@@ -91,7 +91,7 @@ function setupBootloader
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     # GRUB_CMDLINE_LINUX="cryptdevice=UUID=abc123yz-abc1-abc2-abcd1234wxyz:root"
     # echo 'GRUB_ENABLE_CRYPTODISK=y' >> /etc/default/grub
-    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:archsystem"' >> /etc/default/grub
+    echo 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/SYSTEM:archsystem"' >> /etc/default/grub
     vim /etc/default/grub
     sleep 1
     # FOR EXT4:
@@ -105,7 +105,7 @@ function setupBootloader
 
   mkinitcpio -p linux
   sleep 1
-  grub-install --target=x86_64-efi --boot-directory=/boot --efi-directory=/boot/EFI --bootloader-id=ARCHGRUB --recheck /dev/sda2
+  grub-install --target=x86_64-efi --boot-directory=/boot --efi-directory=/boot/EFI --bootloader-id=ARCHGRUB --recheck /dev/disk/by-partlabel/BOOT
   sleep 1
   grub-mkconfig -o /boot/grub/grub.cfg
   sleep 1
