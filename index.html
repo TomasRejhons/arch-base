@@ -57,25 +57,25 @@ function setupFilesystemBtrfs
   sleep 1
   
   # Mount Filesystem
-  btrfs subvolume create /mnt/root
+  btrfs subvolume create /mnt/@
   sleep 1
-  btrfs subvolume create /mnt/home
+  btrfs subvolume create /mnt/@home
   sleep 1
-  btrfs subvolume create /mnt/var
+  btrfs subvolume create /mnt/@var
   sleep 1
-  btrfs subvolume create /mnt/snapshots
+  btrfs subvolume create /mnt/@snapshots
   sleep 1
   umount /mnt
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=root $SYSTEM_DRIVE /mnt
+  mount -o noatime,compress=lzo,space_cache,subvol=@ $SYSTEM_DRIVE /mnt
   sleep 1
   mkdir -p /mnt/{home,var,.snapshots}
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=home $SYSTEM_DRIVE /mnt/home
+  mount -o noatime,compress=lzo,space_cache,subvol=@home $SYSTEM_DRIVE /mnt/home
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=var $SYSTEM_DRIVE /mnt/var
+  mount -o noatime,compress=lzo,space_cache,subvol=@var $SYSTEM_DRIVE /mnt/var
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=snapshots $SYSTEM_DRIVE /mnt/.snapshots
+  mount -o noatime,compress=lzo,space_cache,subvol=@snapshots $SYSTEM_DRIVE /mnt/.snapshots
   sleep 1
 }
 
