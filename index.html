@@ -98,7 +98,7 @@ function installSystem
 {
   pacstrap /mnt base base-devel linux linux-headers linux-firmware vim curl
   sleep 1
-  genfstab -L /mnt >> /mnt/etc/fstab
+  genfstab -U /mnt >> /mnt/etc/fstab
   sleep 1
   vim /mnt/etc/fstab
   sleep 1
