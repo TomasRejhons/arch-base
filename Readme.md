@@ -37,6 +37,5 @@ Do a few dry runs on a virtual machine!
 - Examine and edit post-install (Edit the user name)
 - Run <code>bash post-install</code>
 - exit the root prompt, <code>umount -a</code> and <code>reboot</code>
-- If you chose to use BTRFS, you can use snapper-setup to setup snapper and to create the initial system snapshot
-- You can use install-desktop to install desktop environment (I'm currently using Gnome and AwesomeWM)
+- You can use snapper-setup to setup snapper and to create the initial system snapshot
 - (Optional) Run <code>sh archdi</code> to install additional software
