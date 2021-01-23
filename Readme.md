@@ -23,7 +23,7 @@
 
 # Minimalist Arch Linux Installation Script
 
-Collection of very simple scripts I'm using to automate Arch installation (the whole installation process takes < 10 minutes). The script only supports EFI system. You can choose between ext4 and btrfs (both setups support system encryption). Swap is enabled via systemd-swap.
+Collection of very simple scripts I'm using to automate Arch installation (the whole installation process takes < 10 minutes). The script only supports EFI system. The system is using BTRFS with encryption. Swap is enabled via systemd-swap.
 
 Learn the manual installation process first! https://wiki.archlinux.org/index.php/installation_guide
 
