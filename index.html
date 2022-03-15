@@ -46,10 +46,6 @@ function setupFilesystemExt4
 
 function setupFilesystemBtrfs
 {
-  if [ $SYSTEM == gentoo ] then
-    emerge --ask sys-fs/btrfs-progs
-  fi
-
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     SYSTEM_DRIVE=/dev/mapper/archsystem
   else
