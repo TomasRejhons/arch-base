@@ -91,7 +91,7 @@ function mountBoot
   sleep 1
 }
 
-function installSystem
+function installSystemArch
 {
   pacstrap /mnt base base-devel linux linux-headers linux-firmware vim curl
   sleep 1
@@ -108,6 +108,11 @@ function installSystem
   arch-chroot /mnt
 }
 
+function installSystemGentoo
+{
+  echo 'Gentoo WIP'
+}
+
 createPartitions
 
 if [ "$ENCRYPT_SYSTEM" = true ]; then
@@ -121,4 +126,15 @@ else
 fi
 
 mountBoot
-installSystem
+
+ARCHCHECK=$(grep -o "ID=arch" /etc/os-release | wc -l)
+if [ $ARCHCHECK -gt 0 ]                                                                      
+then        
+  installSystemArch
+fi
+
+GENTOOCHECK=$(grep -o "ID=gentoo" /etc/os-release | wc -l)
+if [ $GENTOOCHECK -gt 0 ]                                                                      
+then        
+  installSystemGentoo
+fi
