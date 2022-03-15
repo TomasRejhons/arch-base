@@ -2,20 +2,6 @@
 
 source config
 
-DISTRO=unknown
-
-ARCHCHECK=$(grep -o "ID=arch" /etc/os-release | wc -l)
-if [ $ARCHCHECK -gt 0 ]                                                                      
-then        
-  DISTRO=arch
-fi
-
-GENTOOCHECK=$(grep -o "ID=gentoo" /etc/os-release | wc -l)
-if [ $GENTOOCHECK -gt 0 ]                                                                      
-then        
-  DISTRO=gentoo
-fi
-
 function createPartitions
 {
   sgdisk --zap-all $DRIVE
@@ -126,11 +112,6 @@ function installSystemArch
   arch-chroot /mnt
 }
 
-function installSystemGentoo
-{
-  echo 'Gentoo WIP'
-}
-
 createPartitions
 
 if [ "$ENCRYPT_SYSTEM" = true ]; then
@@ -144,13 +125,4 @@ else
 fi
 
 mountBoot
-
-if [ $DISTRO == arch ]                                                                      
-then        
-  installSystemArch
-fi
-
-if [ $DISTRO == gentoo ]                                                                      
-then        
-  installSystemGentoo
-fi
+installSystemArch
