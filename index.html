@@ -2,6 +2,20 @@
 
 source config
 
+DISTRO=unknown
+
+ARCHCHECK=$(grep -o "ID=arch" /etc/os-release | wc -l)
+if [ $ARCHCHECK -gt 0 ]                                                                      
+then        
+  DISTRO=arch
+fi
+
+GENTOOCHECK=$(grep -o "ID=gentoo" /etc/os-release | wc -l)
+if [ $GENTOOCHECK -gt 0 ]                                                                      
+then        
+  DISTRO=gentoo
+fi
+
 function createPartitions
 {
   sgdisk --zap-all $DRIVE
@@ -46,6 +60,10 @@ function setupFilesystemExt4
 
 function setupFilesystemBtrfs
 {
+  if [ $SYSTEM == gentoo ] then
+    emerge --ask sys-fs/btrfs-progs
+  fi
+
   if [ "$ENCRYPT_SYSTEM" = true ]; then
     SYSTEM_DRIVE=/dev/mapper/archsystem
   else
@@ -127,14 +145,12 @@ fi
 
 mountBoot
 
-ARCHCHECK=$(grep -o "ID=arch" /etc/os-release | wc -l)
-if [ $ARCHCHECK -gt 0 ]                                                                      
+if [ $DISTRO == arch ]                                                                      
 then        
   installSystemArch
 fi
 
-GENTOOCHECK=$(grep -o "ID=gentoo" /etc/os-release | wc -l)
-if [ $GENTOOCHECK -gt 0 ]                                                                      
+if [ $DISTRO == gentoo ]                                                                      
 then        
   installSystemGentoo
 fi
