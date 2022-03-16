@@ -40,6 +40,7 @@ function setupFilesystemExt4
   else
     SYSTEM_DRIVE=/dev/disk/by-partlabel/SYSTEM
   fi
+  mkdir -p /mnt/system
   mount $SYSTEM_DRIVE /mnt/system
   sleep 1
 }
