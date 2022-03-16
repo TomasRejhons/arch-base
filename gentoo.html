@@ -54,6 +54,7 @@ function setupFilesystemBtrfs
   fi
   mkfs.btrfs -f -L archbtrfs $SYSTEM_DRIVE
   sleep 1
+  mkdir -p /mnt/system
   mount $SYSTEM_DRIVE /mnt/system
   sleep 1
   
