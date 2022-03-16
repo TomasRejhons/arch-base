@@ -83,7 +83,7 @@ function setupFilesystemBtrfs
 
 function mountBoot
 {
-  mkdir /mnt/system/boot
+  mkdir -p /mnt/system/boot
   sleep 1
   mount /dev/disk/by-partlabel/BOOT /mnt/system/boot
   sleep 1
