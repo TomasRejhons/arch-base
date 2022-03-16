@@ -67,9 +67,9 @@ function setupFilesystemBtrfs
   sleep 1
   btrfs subvolume create /mnt/system/@snapshots
   sleep 1
-  umount /mnt
+  umount /mnt/system
   sleep 1
-  mount -o noatime,compress=lzo,space_cache,subvol=@ $SYSTEM_DRIVE /mnt
+  mount -o noatime,compress=lzo,space_cache,subvol=@ $SYSTEM_DRIVE /mnt/system
   sleep 1
   mkdir -p /mnt/system/{home,var,.snapshots}
   sleep 1
