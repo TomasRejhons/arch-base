@@ -93,6 +93,28 @@ function mountBoot
   sleep 1
 }
 
+function installSystemArch
+{
+  pacstrap /mnt/system base base-devel linux linux-headers linux-firmware vim curl
+  sleep 1
+  genfstab -U /mnt/system >> /mnt/system/etc/fstab
+  sleep 1
+  vim /mnt/system/etc/fstab
+  sleep 1
+  curl -LJO tomasrejhons.github.io/malis/post-install
+  sleep 1
+  cp post-install /mnt/system/post-install
+  sleep 1
+  cp config /mnt/system/config
+  sleep 1
+  arch-chroot /mnt/system
+}
+
+function installSystemGentoo
+{
+}
+
+
 createPartitions
 
 if [ "$ENCRYPT_SYSTEM" = true ]; then
