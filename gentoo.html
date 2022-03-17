@@ -114,18 +114,18 @@ function gentooStage3
 {
   cd /mnt/system
   sleep 1
-  wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20220227T170528Z/stage3-amd64-desktop-openrc-20220227T170528Z.tar.xz
+  wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20220315T091810Z/stage3-amd64-openrc-20220315T091810Z.tar.xz
   sleep 1
-  tar xpvf ./stage3-amd64-desktop-openrc-20220227T170528Z.tar.xz --xattrs-include='*.*' --numeric-owner
+  tar xpvf ./stage3-amd64-openrc-20220315T091810Z.tar.xz --xattrs-include='*.*' --numeric-owner
+  sleep 1
   mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
-  
-  mkdir -p /mnt/system/etc/portage/repos.conf && \
-      cp /mnt/system/usr/share/portage/config/repos.conf \
-         /mnt/system/etc/portage/repos.conf/gentoo.conf
-         
+  sleep 1  
+  mkdir -p /mnt/system/etc/portage/repos.conf && cp /mnt/system/usr/share/portage/config/repos.conf /mnt/system/etc/portage/repos.conf/gentoo.conf
+  sleep 1
   cp --dereference /etc/resolv.conf /mnt/system/etc/
-  
+  sleep 1  
   mount --types proc /proc /mnt/system/proc
+  sleep 1
   mount --rbind /sys /mnt/system/sys
   mount --make-rslave /mnt/system/sys
   mount --rbind /dev /mnt/system/dev
