@@ -138,11 +138,6 @@ function gentooStage3
   export PS1="[chroot] ${PS1}"
 }
 
-function installSystemGentoo
-{
-  echo Gentoo
-}
-
 createPartitions
 
 if [ "$ENCRYPT_SYSTEM" = true ]; then
