@@ -110,10 +110,37 @@ function installSystemArch
   arch-chroot /mnt/system
 }
 
+function gentooStage3
+{
+  cd /mnt/system
+  sleep 1
+  wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20220227T170528Z/stage3-amd64-desktop-openrc-20220227T170528Z.tar.xz
+  sleep 1
+  tar xpvf ./stage3-amd64-desktop-openrc-20220227T170528Z.tar.xz --xattrs-include='*.*' --numeric-owner
+  mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+  
+  mkdir -p /mnt/system/etc/portage/repos.conf && \
+      cp /mnt/system/usr/share/portage/config/repos.conf \
+         /mnt/system/etc/portage/repos.conf/gentoo.conf
+         
+  cp --dereference /etc/resolv.conf /mnt/system/etc/
+  
+  mount --types proc /proc /mnt/system/proc
+  mount --rbind /sys /mnt/system/sys
+  mount --make-rslave /mnt/system/sys
+  mount --rbind /dev /mnt/system/dev
+  mount --make-rslave /mnt/system/dev
+  mount --bind /run /mnt/system/run
+  mount --make-slave /mnt/system/run
+  
+  chroot /mnt/system /bin/bash
+  source /etc/profile
+  export PS1="[chroot] ${PS1}"
+}
+
 function installSystemGentoo
 {
 }
-
 
 createPartitions
 
