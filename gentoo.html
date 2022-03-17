@@ -118,7 +118,7 @@ function gentooStage3
   sleep 1
   tar xpvf ./stage3-amd64-openrc-20220315T091810Z.tar.xz --xattrs-include='*.*' --numeric-owner
   sleep 1
-  mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+  mirrorselect -i -o >> /mnt/system/etc/portage/make.conf
   sleep 1  
   mkdir -p /mnt/system/etc/portage/repos.conf && cp /mnt/system/usr/share/portage/config/repos.conf /mnt/system/etc/portage/repos.conf/gentoo.conf
   sleep 1
