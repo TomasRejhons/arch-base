@@ -23,9 +23,7 @@ function createPartitions
 
 function setupEncryption
 {
-  modprobe dm-crypt
-  sleep 1
-  modprobe dm-mod
+  modprobe dm-crypt dm-mod
   sleep 1
   cryptsetup luksFormat -v -s 512 -h sha512 /dev/disk/by-partlabel/SYSTEM
   sleep 1
