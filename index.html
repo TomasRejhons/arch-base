@@ -27,7 +27,7 @@ function setupEncryption
   sleep 1
   cryptsetup luksFormat -v -s 512 -h sha512 /dev/disk/by-partlabel/SYSTEM
   sleep 1
-  cryptsetup --allow-discards --persistent open /dev/disk/by-partlabel/SYSTEM archsystem
+  cryptsetup --persistent open /dev/disk/by-partlabel/SYSTEM archsystem
   sleep 1
 }
 
