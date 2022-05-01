@@ -91,7 +91,7 @@ function mountBoot
 
 function installSystemArch
 {
-  pacstrap /mnt base base-devel linux linux-headers linux-firmware vim curl
+  pacstrap /mnt base base-devel linux linux-headers linux-firmware vim curl btrfs-progs
   sleep 1
   genfstab -U /mnt >> /mnt/etc/fstab
   sleep 1
